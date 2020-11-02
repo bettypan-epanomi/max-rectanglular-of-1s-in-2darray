@@ -1,0 +1,51 @@
+#include <iostream>
+using namespace std;
+ 
+int a[1001][1001];
+int ps[1001][1001];
+ 
+bool rect_accepted(int i, int j, int h, int w) {
+	   bool ok=true;
+	   for(int y=i; y<i+h-1; y++){
+	   	  if(j==0){
+	   	  	if(ps[y][j+w-1]<w){
+	   	  		ok=false;
+	   	  	}
+	   	  }else{
+	   	  	 if(ps[y][j+w-1]-ps[y][j-1]<w){
+	   	  	 	ok=false;
+	   	  	 }
+	   	  }
+	   }
+	   return ok;
+}
+int main() {
+       int n;
+       cin>>n;
+       for(int i=0; i<n; i++){
+       	  for(int j=0; j<n; j++){
+       	  	 cin>>a[i][j];
+       	  }
+       }
+       for(int y=0; y<n; y++){
+       	  ps[0][y]==a[0][y];
+       	  for(int x=1; x<n; x++){
+       	  	ps[x][y]=ps[x-1][y]+a[x][y];
+       	  }
+       }
+       int area=0 , max_area=0;
+       for(int i=0; i<n; i++){
+       	 for(int j=0; j<n; j++){
+       	 	for(int h=1; h<n-i+1; h++){
+       	 	   for(int w=1; w<n-j+1; w++){
+       	 	   	  if(rect_accepted(i,j,h,w)){
+       	 	   	   	   area=h*w;
+       	 	   	   	   max_area=max(area,max_area);
+       	 	   	    }
+       	 	   }
+       	 	}
+       	 }
+       }
+       cout<<max_area;
+	return 0;
+}

@@ -6,13 +6,13 @@ int ps[1001][1001];
  
 bool rect_accepted(int i, int j, int h, int w) {
 	   bool ok=true;
-	   for(int y=i; y<i+w-1; y++){
-	   	  if(j==0){
-	   	  	if(ps[y][j+h-1]<w){
+	   for(int y=j; y<=j+h-1; y++){
+	   	  if(I==0){
+	   	  	if(ps[i+w-1][y]<w){
 	   	  		ok=false;
 	   	  	}
 	   	  }else{
-	   	  	 if(ps[y][j+h-1]-ps[y][j-1]<w){
+	   	  	 if(ps[i+w-1][y]-ps[i-1][y]<w){
 	   	  	 	ok=false;
 	   	  	 }
 	   	  }
